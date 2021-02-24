@@ -15,3 +15,5 @@ Caused by: java.io.EOFException
 ```
 
 While if you change the version to 5.1.x, it will work just fine.
+
+Important! Please make sure you have git-lfs installed first.
