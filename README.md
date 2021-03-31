@@ -1,6 +1,6 @@
 This repo contains a minimal example to reproduce an issue with Hollow's snapshot consumption
 
-Run the code in Consumer.kt, it will fetch two snapshots without using the delta files.
+Run the code in [Consumer.kt](src/main/kotlin/Consumer.kt), it will fetch two snapshots without using the delta files.
 
 If the `consumer.getAPI(EntityApi::class.java)` will be called after each `triggerRefreshTo()`, 
 `EntityApi` class will provide fresh data.
