@@ -1,19 +1,15 @@
-This repo contains a minimal example to reproduce an issue with Hollow's delta consumption in Hollow 5.2.x.
+This repo contains a minimal example to reproduce an issue with Hollow's snapshot consumption
 
-Run the code in Consumer.kt, it will fail with the following error:
+Run the code in Consumer.kt, it will fetch two snapshots without using the delta files.
 
-```kotlin
-Exception in thread "main" java.lang.RuntimeException: java.io.EOFException
-	at com.netflix.hollow.api.consumer.HollowConsumer.triggerRefreshTo(HollowConsumer.java:297)
-	at ConsumerKt.main(Consumer.kt:23)
-	at ConsumerKt.main(Consumer.kt)
-Caused by: java.io.EOFException
-	at java.base/java.io.DataInputStream.readFully(DataInputStream.java:202)
-	at java.base/java.io.DataInputStream.readLong(DataInputStream.java:421)
-	at com.netflix.hollow.core.read.HollowBlobInput.readLong(HollowBlobInput.java:237)
-	at com.netflix.hollow.core.read.engine.SnapshotPopulatedOrdinalsReader.readOrdinals(SnapshotPopulatedOrdinalsReader.java:38)
-```
+If the `consumer.getAPI(EntityApi::class.java)` will be called after each `triggerRefreshTo()`, 
+`EntityApi` class will provide fresh data.
 
-While if you change the version to 5.1.x, it will work just fine.
+If the `consumer.getAPI(EntityApi::class.java)` will only be called once, `EntityApi` will provide stale
+data.
+
+If the `consumer.getAPI(EntityApi::class.java)` will only be called once, but the delta file will be available,
+`EntityApi` class will provide fresh data.
+
 
 Important! Please make sure you have git-lfs installed first.
