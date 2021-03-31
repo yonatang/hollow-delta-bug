@@ -1,3 +1,5 @@
 snapshot-* filter=lfs diff=lfs merge=lfs -text
 delta-* filter=lfs diff=lfs merge=lfs -text
 reversedelta-* filter=lfs diff=lfs merge=lfs -text
+missing-delta-* filter=lfs diff=lfs merge=lfs -text
+missing-reversedelta-* filter=lfs diff=lfs merge=lfs -text
